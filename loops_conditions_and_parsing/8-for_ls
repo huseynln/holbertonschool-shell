@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+#loop
+for file in *; do
+    if [[ -f "$file" || -d "$file" ]]; then
+        echo "${file#*-}"
+    fi
+done
