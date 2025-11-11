@@ -1,4 +1,4 @@
-
 #!/usr/bin/env bash
 # Groups visitors by IP and HTTP status code, ordered by occurrence count
-awk '{print $1, $9}' | awk '{count[$1" "$2]++} END {for (key in count) print count[key], key}' | sort -rn
+
+awk '{print $1, $9}' apache-access.log | awk '{count[$1" "$2]++} END {for (key in count) print count[key], key}' | sort -rn
