@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 # Init script that manages manage_my_process daemon
-#!/bin/bash
-
-# PID file path
 PID_FILE="/var/run/my_process.pid"
 
 # Path to the manage_my_process script
@@ -13,31 +10,41 @@ case "$1" in
         # Start manage_my_process in the background
         $SCRIPT &
         # Save the PID to the file
-        echo $! > "$PID_FILE"
+        echo $! > "$PID_FILE" 2>/dev/null || echo $! > /tmp/my_process.pid
         # Display message
         echo "manage_my_process started"
         ;;
 
     stop)
-        # Read the PID from the file and kill the process
+        # Try to read PID from /var/run, fall back to /tmp
         if [ -f "$PID_FILE" ]; then
-            kill "$(cat "$PID_FILE")"
+            PID=$(cat "$PID_FILE")
+            kill "$PID" 2>/dev/null
             rm -f "$PID_FILE"
+        elif [ -f "/tmp/my_process.pid" ]; then
+            PID=$(cat /tmp/my_process.pid)
+            kill "$PID" 2>/dev/null
+            rm -f /tmp/my_process.pid
         fi
         # Display message
         echo "manage_my_process stopped"
         ;;
 
     restart)
-        # Read the PID from the file and kill the process
+        # Try to read PID from /var/run, fall back to /tmp
         if [ -f "$PID_FILE" ]; then
-            kill "$(cat "$PID_FILE")"
+            PID=$(cat "$PID_FILE")
+            kill "$PID" 2>/dev/null
             rm -f "$PID_FILE"
+        elif [ -f "/tmp/my_process.pid" ]; then
+            PID=$(cat /tmp/my_process.pid)
+            kill "$PID" 2>/dev/null
+            rm -f /tmp/my_process.pid
         fi
         # Start the process again
         $SCRIPT &
         # Save the new PID
-        echo $! > "$PID_FILE"
+        echo $! > "$PID_FILE" 2>/dev/null || echo $! > /tmp/my_process.pid
         # Display message
         echo "manage_my_process restarted"
         ;;
