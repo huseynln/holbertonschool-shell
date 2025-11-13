@@ -39,7 +39,7 @@ case "$1" in
     
     *)
         # Display usage for any other argument or no argument
-        echo "Usage: manage_my_process {start|stop|restart}"
+        echo "Usage: 11-manage_my_process {start|stop|restart}"
         exit 1
         ;;
 esac
