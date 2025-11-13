@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Script that creates a PID file and handles various signals
 
+# Create PID file first, before anything else
+echo "$" > /var/run/myscript.pid
+
 # Function to handle SIGTERM
 sigterm_handler() {
     echo "I hate the kill command"
@@ -19,13 +22,13 @@ sigquit_handler() {
     exit 0
 }
 
+# Create PID file first, before setting up traps
+echo $ > /var/run/myscript.pid
+
 # Set up signal traps
 trap sigterm_handler SIGTERM
 trap sigint_handler SIGINT
 trap sigquit_handler SIGQUIT
-
-# Create PID file
-echo $$ > /var/run/myscript.pid
 
 # Infinite loop displaying message
 while true
