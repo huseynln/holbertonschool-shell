@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # Init script that manages manage_my_process daemon
+# PID file path
 PID_FILE="/var/run/my_process.pid"
 
 # Path to the manage_my_process script
@@ -14,7 +15,7 @@ case "$1" in
         # Display message
         echo "manage_my_process started"
         ;;
-    
+
     stop)
         # Kill the process using the PID from the file
         kill "$(cat $PID_FILE)"
@@ -23,7 +24,7 @@ case "$1" in
         # Display message
         echo "manage_my_process stopped"
         ;;
-    
+
     restart)
         # Stop the process
         kill "$(cat $PID_FILE)"
@@ -36,10 +37,10 @@ case "$1" in
         # Display message
         echo "manage_my_process restarted"
         ;;
-    
+
     *)
         # Display usage for any other argument or no argument
-        echo "Usage: 11-manage_my_process {start|stop|restart}"
+        echo "Usage: manage_my_process {start|stop|restart}"
         exit 1
         ;;
 esac
