@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # Find the Process ID (PID) of the process named "7-highlander"
 # The 'pgrep' command searches for processes based on name and prints their PIDs.
-PID=$(pgrep 7-highlander)
+pkill -9 7-highlander
 
-# Check if a PID was found
-if [ -z "$PID" ]; then
-    echo "Process 7-highlander not found."
+# Check the exit status of pkill
+if [ $? -eq 0 ]; then
+    echo "Process 7-highlander successfully killed."
 else
-    # Kill the found process using the 'kill' command.
-    # The default signal is SIGTERM (15), which typically asks the process to terminate gracefully.
-    kill "$PID"
-    echo "Process 7-highlander (PID: $PID) killed."
+    # An exit status of 1 (or other non-zero) typically means no process was found 
+    # OR the kill failed due to permissions. In this environment, it's safer to assume 
+    # the process was simply not found when the script ran.
+    echo "Attempted to kill process 7-highlander."
 fi
