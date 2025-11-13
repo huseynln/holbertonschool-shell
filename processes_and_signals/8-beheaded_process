@@ -1,4 +1,15 @@
-#!/usr/bin/env bash
-# Script that kills the 7-highlander process
+#!/bin/bash
 
-kill "$(ps -eo pid,comm | grep 7-highlander | grep -v grep | awk '{print $1}')"
+# Find the Process ID (PID) of the process named "7-highlander"
+# The 'pgrep' command searches for processes based on name and prints their PIDs.
+PID=$(pgrep 7-highlander)
+
+# Check if a PID was found
+if [ -z "$PID" ]; then
+    echo "Process 7-highlander not found."
+else
+    # Kill the found process using the 'kill' command.
+    # The default signal is SIGTERM (15), which typically asks the process to terminate gracefully.
+    kill "$PID"
+    echo "Process 7-highlander (PID: $PID) killed."
+fi
