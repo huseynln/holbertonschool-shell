@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # Init script that manages manage_my_process daemon
+#!/bin/bash
+
 # PID file path
 PID_FILE="/var/run/my_process.pid"
 
@@ -17,19 +19,21 @@ case "$1" in
         ;;
 
     stop)
-        # Kill the process using the PID from the file
-        kill "$(cat $PID_FILE)"
-        # Delete the PID file
-        rm -f "$PID_FILE"
+        # Read the PID from the file and kill the process
+        if [ -f "$PID_FILE" ]; then
+            kill "$(cat "$PID_FILE")"
+            rm -f "$PID_FILE"
+        fi
         # Display message
         echo "manage_my_process stopped"
         ;;
 
     restart)
-        # Stop the process
-        kill "$(cat $PID_FILE)"
-        # Delete the PID file
-        rm -f "$PID_FILE"
+        # Read the PID from the file and kill the process
+        if [ -f "$PID_FILE" ]; then
+            kill "$(cat "$PID_FILE")"
+            rm -f "$PID_FILE"
+        fi
         # Start the process again
         $SCRIPT &
         # Save the new PID
