@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Script that creates a PID file and handles various signals
 
-# Create PID file
-echo $$ > /var/run/myscript.pid
+# Ensure /var/run directory exists and create PID file
+mkdir -p /var/run 2>/dev/null
+echo $ > /var/run/myscript.pid
 
 # Function to handle SIGTERM
 sigterm_handler() {
