@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Find the Process ID (PID) of the process named "7-highlander"
 # The 'pgrep' command searches for processes based on name and prints their PIDs.
