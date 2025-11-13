@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 # by sending the TERM (terminate) signal.
-kill -9 "$(4-to_infinity_and_beyond)"
+pkill -9 "$(4-to_infinity_and_beyond)"
