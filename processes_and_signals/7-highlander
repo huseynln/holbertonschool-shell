@@ -1,4 +1,13 @@
 #!/usr/bin/env bash
 # Script that stops 7-highlander process
 
-pkill -f 7-highlander
+#!/bin/bash
+# 7-highlander
+
+trap 'echo "I am invincible!!!"' SIGTERM
+
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
