@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
 # by sending the TERM (terminate) signal.
 
-pid=$(ps -ef | grep "4-to_infinity_and_beyond" | grep -v grep | awk '{print $2}')
-[ -n "$pid" ] && echo "$pid" > /proc/$pid/fd/0
+pkill -f 4-to_infinity_and_beyond
