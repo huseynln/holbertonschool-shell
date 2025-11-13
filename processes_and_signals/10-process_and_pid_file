@@ -23,8 +23,6 @@ sigquit_handler() {
     exit 0
 }
 
-# Create PID file first, before setting up traps
-echo $ > /var/run/myscript.pid
 
 # Set up signal traps
 trap sigterm_handler SIGTERM
